@@ -29,7 +29,7 @@ describe('example', () => {
     });
 
     test('JS無効だとno-script.htmlにリダイレクト', async () => {
-        page.setJavaScriptEnabled(false);
+        await page.setJavaScriptEnabled(false);
         await page.goto('http://localhost:8080/index.html', { timeout: 1000, waitUntil: 'domcontentloaded' });
         // DOMContentLoaded後、metaタグによるリダイレクト待ち
         await page.waitForNavigation({ timeout: 1000 });
@@ -39,7 +39,7 @@ describe('example', () => {
 
     test('Cookie無効だとno-cookie.htmlにリダイレクト', async () => {
 
-        page.evaluateOnNewDocument(() => {
+        await page.evaluateOnNewDocument(() => {
             Object.defineProperty(
                 navigator,
                 'cookieEnabled',
