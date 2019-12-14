@@ -47,9 +47,11 @@ describe('example', () => {
             );
         });
 
-        page.goto('http://localhost:8080/index.html', { timeout: 1000, waitUntil: 'domcontentloaded' });
-        // 同期スクリプト実行・遷移待ち
-        await page.waitForNavigation({ timeout: 1000 });
+        await Promise.all([
+            page.goto('http://localhost:8080/index.html', { timeout: 1000, waitUntil: 'domcontentloaded' }),
+            // 同期スクリプト実行・遷移待ち
+            page.waitForNavigation({ timeout: 1000 })
+        ]);
 
         await expect(page.title()).resolves.toMatch('no-cookie.html');
     });
