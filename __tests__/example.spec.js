@@ -23,8 +23,8 @@ describe('example', () => {
         await browser.close();
     });
 
-    it('should be titled "Example Domain"', async () => {
-        await page.goto('https://example.com');
-        await expect(page.title()).resolves.toMatch('Example Domain');
+    test('JS,Cookieともに有効ならばindex.htmlを表示する', async () => {
+        await page.goto('http://localhost:8080/index.html');
+        await expect(page.title()).resolves.toMatch('index.html');
     });
 });
