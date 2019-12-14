@@ -8,6 +8,11 @@
     <title>
       index.html
     </title>
+    <script>
+     if (!navigator.cookieEnabled) {
+         location.replace('/no-cookie.html');
+     }
+    </script>
   </head>
   <body>
     index.html
