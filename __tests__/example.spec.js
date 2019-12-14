@@ -24,7 +24,16 @@ describe('example', () => {
     });
 
     test('JS,Cookieともに有効ならばindex.htmlを表示する', async () => {
-        await page.goto('http://localhost:8080/index.html');
+        await page.goto('http://localhost:8080/index.html', { waitUntil: 'domcontentloaded' });
         await expect(page.title()).resolves.toMatch('index.html');
+    });
+
+    test('JS無効だとno-script.htmlにリダイレクト', async () => {
+        page.setJavaScriptEnabled(false);
+        await page.goto('http://localhost:8080/index.html', { waitUntil: 'domcontentloaded' });
+        // domcontentloaded後、リダイレクト待ち
+        await page.waitForNavigation({ timeout: 1000 });
+
+        await expect(page.title()).resolves.toMatch('no-script.html');
     });
 });
